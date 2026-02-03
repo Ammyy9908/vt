@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will You Be My Valentine ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  font-size: 2.6rem;
+  color: #b30059;
+}
+
+.name {
+  font-size: 1.5rem;
+  color: #800040;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.quote-box {
+  background: rgba(255,255,255,0.9);
+  padding: 18px;
+  border-radius: 15px;
+  margin: 30px 0;
+  font-style: italic;
+}
+
+.buttons {
+  margin-top: 25px;
+}
+
+button {
+  padding: 15px 28px;
+  margin: 10px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+.no {
+  background: white;
+  color: #ff4d6d;
+  position: relative;
+}
+
+.response {
+  margin-top: 25px;
+  font-size: 1.5rem;
+  color: #800040;
+  display: none;
+}
+
+/* 💕 Floating Hearts */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* 🎊 Confetti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: 50%;
+  left: 50%;
+  animation: confettiFall 3s linear forwards;
+  z-index: 9999;
+}
+
+@keyframes confettiFall {
+  to {
+    transform: translate(var(--x), var(--y)) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* 📸 Slideshow */
+.slideshow {
+  max-width: 500px;
+  margin: 40px auto;
+  display: none;
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  position: relative;
+}
+
+.slide img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.caption {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  max-width: 85%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Will You Be My Valentine? ❤️</h1>
+  <div class="name">For my Anvi ❤️</div>
+  <p class="subtitle">Every moment with you feels like magic ✨</p>
+
+  <div class="gallery">
+    <img src="photo1.jpeg">
+    <img src="photo2.jpeg">
+    <img src="photo3.jpeg">
+  </div>
+
+  <div class="quote-box" id="quote">
+    "You are my today and all of my tomorrows."
+  </div>
+
+  <div class="buttons">
+    <button class="yes" onclick="sayYes()">Yes 💖</button>
+    <button class="no" id="noBtn">No 🙈</button>
+  </div>
+
+  <div class="response" id="response">
+    Anvi ❤️, you just made me the happiest person alive 💕🌹
+  </div>
+
+  <div class="slideshow" id="slideshow">
+    <div class="slide active">
+      <img src="https://res.cloudinary.com/truewalls/image/upload/v1770132046/samples/uc.jpg" alt="Drive Image">
+      <div class="caption">The moment I knew you were special ❤️</div>
+    </div>
+    <div class="slide">
+      <img src="https://res.cloudinary.com/truewalls/image/upload/v1770132181/samples/people/uc.jpg">
+      <div class="caption">Every smile with you feels like home 🏡</div>
+    </div>
+    <div class="slide">
+      <img src="https://res.cloudinary.com/truewalls/image/upload/v1770132233/samples/landscapes/uc.jpg">
+      <div class="caption">Forever starts with us 💕</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// 💬 Quotes
+const quotes = [
+  "Anvi ❤️, you are my favorite notification 💌",
+  "With you, every day feels like Valentine’s Day ❤️",
+  "I found my forever in you 💕",
+  "You + Me = Always ✨"
+];
+let i = 0;
+setInterval(() => {
+  document.getElementById("quote").innerText = `"${quotes[i++ % quotes.length]}"`;
+}, 3000);
+
+// 💕 Hearts
+setInterval(() => {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerText = "❤️";
+  h.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 6000);
+}, 400);
+
+// 🙈 No Button Run Away
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.transform =
+    `translate(${Math.random()*200-100}px, ${Math.random()*200-100}px)`;
+});
+
+// 🎊 YES Action
+let slideIndex = 0;
+function sayYes() {
+  document.getElementById("response").style.display = "block";
+  document.getElementById("slideshow").style.display = "block";
+  launchConfetti();
+  startSlideshow();
+}
+
+function launchConfetti() {
+  const colors = ["#ff4d6d","#ffd6e0","#fff"];
+  for(let i=0;i<120;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.style.background=colors[Math.floor(Math.random()*colors.length)];
+    c.style.setProperty("--x",(Math.random()-0.5)*600+"px");
+    c.style.setProperty("--y",(Math.random()*600+200)+"px");
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
+  }
+}
+
+function startSlideshow(){
+  const slides=document.querySelectorAll(".slide");
+  setInterval(()=>{
+    slides[slideIndex].classList.remove("active");
+    slideIndex=(slideIndex+1)%slides.length;
+    slides[slideIndex].classList.add("active");
+  },3500);
+}
+</script>
+
+</body>
+</html>
